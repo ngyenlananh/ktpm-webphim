@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Quản lý admin') }}</div>
+                <div class="card-header">Trang Quản Lý</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,16 +14,10 @@
                         </div>
                     @endif
 
-                    {{ __('Welcome to admin') }}
+                    welcome
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-
-
-
-
-
- 

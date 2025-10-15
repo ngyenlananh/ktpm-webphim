@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
- <div class="row container" id="wrapper">
+<div class="row container" id="wrapper">
          <div class="halim-panel-filter">
             <div class="panel-heading">
                <div class="row">
@@ -77,26 +77,9 @@
                         <div role="tabpanel" class="tab-pane active server-1" id="server-0">
                            <div class="halim-server">
                               <ul class="halim-list-eps">
-
                                  <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 active halim-info-1-1 box-shadow" data-post-id="37976" data-server="1" data-episode="1" data-position="first" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 1 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 1">1</span></li></a>
                                  <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-2 box-shadow" data-post-id="37976" data-server="1" data-episode="2" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 2 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 2">2</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-3 box-shadow" data-post-id="37976" data-server="1" data-episode="3" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 3 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 3">3</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-4 box-shadow" data-post-id="37976" data-server="1" data-episode="4" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 4 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 4">4</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-5 box-shadow" data-post-id="37976" data-server="1" data-episode="5" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 5 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 5">5</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-6 box-shadow" data-post-id="37976" data-server="1" data-episode="6" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 6 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 6">6</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-7 box-shadow" data-post-id="37976" data-server="1" data-episode="7" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 7 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 7">7</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-8 box-shadow" data-post-id="37976" data-server="1" data-episode="8" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 8 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 8">8</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-9 box-shadow" data-post-id="37976" data-server="1" data-episode="9" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 9 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 9">9</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-10 box-shadow" data-post-id="37976" data-server="1" data-episode="10" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 10 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 10">10</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-11 box-shadow" data-post-id="37976" data-server="1" data-episode="11" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 11 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 11">11</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-12 box-shadow" data-post-id="37976" data-server="1" data-episode="12" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 12 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 12">12</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-13 box-shadow" data-post-id="37976" data-server="1" data-episode="13" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 13 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 13">13</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-14 box-shadow" data-post-id="37976" data-server="1" data-episode="14" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 14 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 14">14</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-15 box-shadow" data-post-id="37976" data-server="1" data-episode="15" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 15 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 15">15</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-16 box-shadow" data-post-id="37976" data-server="1" data-episode="16" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 16 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 16">16</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-17 box-shadow" data-post-id="37976" data-server="1" data-episode="17" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 17 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 17">17</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-18 box-shadow" data-post-id="37976" data-server="1" data-episode="18" data-position="" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 18 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 18">18</span></li></a>
-                                 <a href="{{route('episode')}}"><li class="halim-episode"><span class="halim-btn halim-btn-2 halim-info-1-19 box-shadow" data-post-id="37976" data-server="1" data-episode="19" data-position="last" data-embed="0" data-title="Xem phim Tôi Và Chúng Ta Ở Bên Nhau - Tập 19 - Be Together - vietsub + Thuyết Minh" data-h1="Tôi Và Chúng Ta Ở Bên Nhau - tập 19">19</span></li></a>
+                                 
                               </ul>
                               <div class="clearfix"></div>
                            </div>
@@ -182,7 +165,7 @@
            
             </div>
             <script>
-               jQuery(document).ready(function($) {				
+               jQuery(document).ready(function($) {            
                var owl = $('#halim_related_movies-2');
                owl.owlCarousel({loop: true,margin: 4,autoplay: true,autoplayTimeout: 4000,autoplayHoverPause: true,nav: true,navText: ['<i class="hl-down-open rotate-left"></i>', '<i class="hl-down-open rotate-right"></i>'],responsiveClass: true,responsive: {0: {items:2},480: {items:3}, 600: {items:4},1000: {items: 4}}})});
             </script>
@@ -328,4 +311,5 @@
                </div>
             </aside>
       </div>
-@endsection 
+      </div>
+@endsection

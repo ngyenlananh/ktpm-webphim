@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Category;
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -17,40 +18,38 @@ class CategoryController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return 
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $list = Category::all();
-        return view('category.create', compact('list'));
-
+        $list = Category::orderBy('position','ASC')->get();
+        return view('admincp.category.form', compact('list'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $data = $request->all();
         $category = new Category();
-        $category ->title = $data['title'];
-        $category ->slug = $data['slug'];
-        
-        $category ->description = $data['description'];
-
-        $category->status = $request->input('status', 0);
-     //   $category->status = $data['status'];
-        $category -> save(); 
+        $category->title = $data['title'];
+        $category->slug = $data['slug'];
+        $category->description = $data['description'];
+        $category->status = $data['status'];
+        $category->save();
         return redirect()->back();
-        
-        
-        
     }
 
     /**
      * Display the specified resource.
-     *   $name
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -58,37 +57,55 @@ class CategoryController extends Controller
     }
 
     /**
-      * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $category = Category::find($id);
-         $list = Category::all();
-        return view('category.create', compact('list','category'));
+        $list = Category::orderBy('position','ASC')->get();
+        return view('admincp.category.form', compact('list','category'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
-        $category =  Category::find($id);
-        $category ->title = $data['title'];
-        $category ->slug = $data['slug'];
-        $category ->description = $data['description'];
-        $category->status = $request->input('status', 0);
-     //   $category->status = $data['status'];
-        $category -> save(); 
+        $category = Category::find($id);
+        $category->title = $data['title'];
+        $category->slug = $data['slug'];
+        $category->description = $data['description'];
+        $category->status = $data['status'];
+        $category->save();
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        Category::find($id) ->delete();
-          return redirect()->back();
+        Category::find($id)->delete();
+        return redirect()->back();
+    }
+    public function resorting(Request  $request){
+        $data = $request->all();
+
+        foreach ($data['array_id'] as $key => $value) {
+            $category = Category::find($value);
+            $category->position = $key;
+            $category->save();
+        }
     }
 }

@@ -9,11 +9,11 @@
       <meta name="DC.language" scheme="utf-8" content="vi" />
       <meta name="language" content="Việt Nam">
       
-
+      <meta name="csrf-token" content="{{ csrf_token() }}" />
       <link rel="shortcut icon" href="https://www.pngkey.com/png/detail/360-3601772_your-logo-here-your-company-logo-here-png.png" type="image/x-icon" />
       <meta name="revisit-after" content="1 days" />
       <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
-      <title>Phim hay 2021 - Xem phim hay nhất</title>
+      <title>Phim hay 2022 - Xem phim hay nhất</title>
       <meta name="description" content="Phim hay 2021 - Xem phim hay nhất, xem phim online miễn phí, phim hot , phim nhanh" />
       <link rel="canonical" href="">
       <link rel="next" href="" />
@@ -29,14 +29,11 @@
      
       <link rel='dns-prefetch' href='//s.w.org' />
       
-     <link rel='stylesheet' id='bootstrap-css' href='{{asset('css/bootstrap.min.css')}}' media='all' /> 
-  
-
-    <link rel='stylesheet' id='style-css' href='{{ asset('css/style.css') }}' media='all' />
-    <link rel='stylesheet' id='wp-block-library-css' href='{{ asset('css/style.min.css?ver=5.7.2') }}' media='all' />
-    <script type='text/javascript' src='{{asset('js/jquery.min.js?ver=5.7.2')}}' id='halim-jquery-js'></script>
-    <style type='text/css' id='wp-custom-css'>
-
+      <link rel='stylesheet' id='bootstrap-css' href='{{asset('css/bootstrap.min.css')}}' media='all' />
+      <link rel='stylesheet' id='style-css' href='{{asset('css/style.css')}}' media='all' />
+      <link rel='stylesheet' id='wp-block-library-css' href='{{asset('css/style.min.css')}}' media='all' />
+      <script type='text/javascript' src='{{asset('js/jquery.min.js?ver=5.7.2')}}' id='halim-jquery-js'></script>
+      <style type="text/css" id="wp-custom-css">
          .textwidget p a img {
          width: 100%;
          }
@@ -54,15 +51,29 @@
                <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">
                   <div class="header-nav">
                      <div class="col-xs-12">
-                        <form id="search-form-pc" name="halimForm" role="search" action="" method="GET">
-                           <div class="form-group">
+                           <style type="text/css">
+                              ul#result {
+                                  position: absolute;
+                                  z-index: 9999;
+                                  background: #1b2d3c;
+                                  width: 94%;
+                                  padding: 10px;
+                                  margin: 1px;
+                              }
+                           </style>
+                           <div class="form-group form-timkiem">
                               <div class="input-group col-xs-12">
-                                 <input id="search" type="text" name="s" class="form-control" placeholder="Tìm kiếm..." autocomplete="off" required>
-                                 <i class="animate-spin hl-spin4 hidden"></i>
+                                 <form action="{{route('tim-kiem')}}" method="GET">
+                                 <input type="text" name="search" id="timkiem" class="form-control" placeholder="Tìm kiếm phim..." autocomplete="off">
+                                 <button class="btn btn-primary">Tìm kiếm</button>
+                                 </form>
                               </div>
+
                            </div>
-                        </form>
-                        <ul class="ui-autocomplete ajax-results hidden"></ul>
+                           <ul class="list-group" id="result" style="display: none">
+                              
+                           </ul>
+                        
                      </div>
                   </div>
                </div>
@@ -99,28 +110,35 @@
                <div class="collapse navbar-collapse" id="halim">
                   <div class="menu-menu_1-container">
                      <ul id="menu-menu_1" class="nav navbar-nav navbar-left">
-                        <li class="current-menu-item active"><a title="Trang Chủ" href="{{ route('homepage')}}">Trang Chủ</a></li>
-                        @foreach($category as $key => $cate)
-                            <li class="mega"><a title="{{$cate->title}}" href="{{route('category')}}">{{$cate->title}}</a></li>
-                        @endforeach
+                        <li class="current-menu-item active"><a title="Trang Chủ" href="{{route('homepage')}}">Trang Chủ</a></li>
                         <li class="mega dropdown">
                            <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
-                               @foreach($genre as $key => $gen)
-                                 <li><a title="{{$gen->title}}" href="{{route('genre')}}">{{$gen->title}}</a></li>
-                                @endforeach
-   
+                              @foreach($genre as $key => $gen)
+                              <li><a title="{{$gen->title}}" href="{{route('genre',$gen->slug)}}">{{$gen->title}}</a></li>
+                              @endforeach
                            </ul>
                         </li>
                         <li class="mega dropdown">
                            <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
                               @foreach($country as $key => $count)
-                              <li><a title="{{$count->title}}" href="{{route('country')}}">{{$count->title}}</a></li>
-                               @endforeach
+                              <li><a title="{{$count->title}}" href="{{route('country',$count->slug)}}">{{$count->title}}</a></li>
+                              @endforeach
                            </ul>
                         </li>
-                       
+                        <li class="mega dropdown">
+                           <a title="Năm Phim" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Năm phim <span class="caret"></span></a>
+                           <ul role="menu" class=" dropdown-menu">
+                              @for($year=2000;$year<=2022;$year++)
+                              <li><a title="{{$year}}" href="{{url('nam/'.$year)}}">{{$year}}</a></li>
+                              @endfor
+                           </ul>
+                        </li>
+                        @foreach($category as $key => $cate)
+                        <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
+                        @endforeach
+                        
                      </ul>
                   </div>
                   <ul class="nav navbar-nav navbar-left" style="background:#000;">
@@ -136,758 +154,15 @@
             </div>
          </div>
       </div>
-
       </div>
       
       <div class="container">
          <div class="row fullwith-slider"></div>
       </div>
       <div class="container">
-          @yield('content')
-        
-               <div class="halim-panel-filter"> 
-               <div id="ajax-filter" class="panel-collapse collapse" aria-expanded="true" role="menu">
-                  <div class="ajax"></div>
-               </div>
-            </div>
-            <div class="col-xs-12 carausel-sliderWidget">
-               <section id="halim-advanced-widget-4">
-                  <div class="section-heading">
-                     <a href="danhmuc.php" title="Phim Chiếu Rạp">
-                     <span class="h-text">Phim Chiếu Rạp</span>
-                     </a>
-                     <ul class="heading-nav pull-right hidden-xs">
-                        <li class="section-btn halim_ajax_get_post" data-catid="4" data-showpost="12" data-widgetid="halim-advanced-widget-4" data-layout="6col"><span data-text="Chiếu Rạp"></span></li>
-                     </ul>
-                  </div>
-                  <div id="halim-advanced-widget-4-ajax-box" class="halim_box">
-                     <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-38424">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php" title="GÓA PHỤ ĐEN">
-                              <figure><img class="lazy img-responsive" src="https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_disneyplus_21043-1_63f71aa0.jpeg" alt="GÓA PHỤ ĐEN" title="GÓA PHỤ ĐEN"></figure>
-                              <span class="status">HD</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">GÓA PHỤ ĐEN</p>
-                                    <p class="original_title">Black Widow</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-
-                    
-                  </div>
-               </section>
-               <div class="clearfix"></div>
-            </div>
-            <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
-               <section id="halim-advanced-widget-2">
-                  <div class="section-heading">
-                     <a href="danhmuc.php" title="Phim Bộ">
-                     <span class="h-text">Phim Bộ</span>
-                     </a>
-                  </div>
-                  <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
-                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                     
-                  </div>
-               </section>
-               <div class="clearfix"></div>
-               <section id="halim-advanced-widget-2">
-                  <div class="section-heading">
-                     <a href="danhmuc.php" title="Phim Lẻ">
-                     <span class="h-text">Phim Lẻ</span>
-                     </a>
-                  </div>
-                  <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
-                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://upload.wikimedia.org/wikipedia/vi/e/e8/Avengers-Infinity_War-Official-Poster.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                     
-                     
-                  </div>
-               </section>
-               <div class="clearfix"></div>
-                <section id="halim-advanced-widget-2">
-                  <div class="section-heading">
-                     <a href="danhmuc.php" title="Phim Lẻ">
-                     <span class="h-text">Phim Chiếu Rạp</span>
-                     </a>
-                  </div>
-                  <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
-                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
-                        <div class="halim-item">
-                           <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://fptninhbinh.vn/wp-content/uploads/2021/06/bo-gia.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
-                              <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
-                              <div class="icon_overlay"></div>
-                              <div class="halim-post-title-box">
-                                 <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
-                                    <p class="original_title">My Roommate Is a Gumiho</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </article>
-
-                     
-                     
-                     
-                  </div>
-               </section>
-               <div class="clearfix"></div>
-            </main>
-            <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-               <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
-                  <div class="section-bar clearfix">
-                     <div class="section-title">
-                        <span>Top Views</span>
-                        <ul class="halim-popular-tab" role="tablist">
-                           <li role="presentation" class="active">
-                              <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="today">Day</a>
-                           </li>
-                           <li role="presentation">
-                              <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="week">Week</a>
-                           </li>
-                           <li role="presentation">
-                              <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="month">Month</a>
-                           </li>
-                           <li role="presentation">
-                              <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="all">All</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <section class="tab-content">
-                     <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-                        <div class="halim-ajax-popular-post-loading hidden"></div>
-                        <div id="halim-ajax-popular-post" class="popular-post">
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                           <div class="item post-37176">
-                              <a href="chitiet.php" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ">
-                                 <div class="item-link">
-                                    <img src="https://ghienphim.org/uploads/GPax0JpZbqvIVyfkmDwhRCKATNtLloFQ.jpeg?v=1624801798" class="lazy post-thumb" alt="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" title="CHỊ MƯỜI BA: BA NGÀY SINH TỬ" />
-                                    <span class="is_trailer">Trailer</span>
-                                 </div>
-                                 <p class="title">CHỊ MƯỜI BA: BA NGÀY SINH TỬ</p>
-                              </a>
-                              <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
-                              <div style="float: left;">
-                                 <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                                 <span style="width: 0%"></span>
-                                 </span>
-                              </div>
-                           </div>
-                          
-                          
-                        </div>
-                     </div>
-                  </section>
-                  <div class="clearfix"></div>
-               </div>
-            </aside>
-      
-         </div>
+         @yield('content')
+      </div>
       <div class="clearfix"></div>
-
       <footer id="footer" class="clearfix">
          <div class="container footer-columns">
             <div class="row container">
@@ -902,12 +177,90 @@
       </footer>
       <div id='easy-top'></div>
      
-     <script type='text/javascript' src='{{ asset('js/bootstrap.min.js?ver=5.7.2') }}' id='bootstrap-js'></script>
-     <script type='text/javascript' src='{{ asset('js/owl.carousel.min.js?ver=5.7.2') }}' id='carousel-js'></script>
-     <script type='text/javascript' src='{{ asset('js/halimtheme-core.min.js?ver=1626273138') }}' id='halim-init-js'></script>
+      <script type='text/javascript' src='{{asset('js/bootstrap.min.js?ver=5.7.2')}}' id='bootstrap-js'></script>
+      <script type='text/javascript' src='{{asset('js/owl.carousel.min.js?ver=5.7.2')}}' id='carousel-js'></script>
 
-      
-     
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0&appId=6125793717446054&autoLogAppEvents=1" nonce="LGtRA0Ug"></script>
+
+      <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
+      <script type="text/javascript">
+         $(document).ready(function(){
+
+           $('#timkiem').keyup(function(){
+               $('#result').html('');
+               var search = $('#timkiem').val();
+               if(search!=''){
+                  $('#result').css('display','inherit');
+                  var expression = new RegExp(search, "i");
+                  $.getJSON('/json/movies.json',function(data){
+                     $.each(data, function(key, value){
+                        if (value.title.search(expression) != -1){
+                           $('#result').append('<li class="list-group-item" style="cursor:pointer"><img height="40" width="40" src="/uploads/movie/'+value.image+'">'+value.title+'<br/> | <span>'+value.description+'</span></li>');
+                        }
+                     });
+                  })
+               }else{
+                  $('#result').css('display','none');
+               }
+           })
+            
+              
+
+            $('#result').on('click', 'li', function() {
+              var click_text = $(this).text().split('|');
+
+              $('#timkiem').val($.trim(click_text[0]));
+
+              $("#result").html('');
+              $('#result').css('display','none');
+             });
+
+         })
+      </script>
+      <script type="text/javascript">
+         $(".watch_trailer").click(function(e) {
+             e.preventDefault();
+             var aid = $(this).attr("href");
+             $('html,body').animate({scrollTop: $(aid).offset().top},'slow');
+         });
+      </script>
+      <script type="text/javascript">
+         $(document).ready(function(){
+             $.ajax({
+                url:"{{url('/filter-topview-default')}}",
+                method:"GET",
+               
+                success:function(data)
+                    {
+                        $('#show0').html(data);
+                    }   
+            }); 
+        
+       
+           
+        
+         $('.filter-sidebar').click(function(){
+            var href = $(this).attr('href');
+            if(href=='#ngay'){
+               var value = 0;
+            }else if(href=='#tuan'){
+               var value = 1;
+            }else{
+               var value = 2;
+            }
+            $.ajax({
+                url:"{{url('/filter-topview-phim')}}",
+                method:"GET",
+                data:{value:value},
+                success:function(data)
+                    {
+                        $('#show'+value).html(data);
+                    }   
+            }); 
+         })
+      })
+      </script>
      
    
       <style>#overlay_mb{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.7);z-index:99999;cursor:pointer}#overlay_mb .overlay_mb_content{position:relative;height:100%}.overlay_mb_block{display:inline-block;position:relative}#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:600px;height:auto;position:relative;left:50%;top:50%;transform:translate(-50%, -50%);text-align:center}#overlay_mb .overlay_mb_content .cls_ov{color:#fff;text-align:center;cursor:pointer;position:absolute;top:5px;right:5px;z-index:999999;font-size:14px;padding:4px 10px;border:1px solid #aeaeae;background-color:rgba(0, 0, 0, 0.7)}#overlay_mb img{position:relative;z-index:999}@media only screen and (max-width: 768px){#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:400px;top:3%;transform:translate(-50%, 3%)}}@media only screen and (max-width: 400px){#overlay_mb .overlay_mb_content .overlay_mb_wrapper{width:310px;top:3%;transform:translate(-50%, 3%)}}</style>

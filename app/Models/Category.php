@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    /**
-     * Tắt tính năng tự động quản lý các trường timestamps (created_at và updated_at).
-     *
-     * 
-     */
-    public $timestamps = false;
-
+	public $timestamps = false;
     use HasFactory;
+    public function movie(){
+
+    	return $this->hasMany(Movie::class)->orderBy('id','DESC');
+    }
 }

@@ -3,85 +3,100 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\country;
-
+use App\Models\Country;
 class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $list = country::all();
-        return view('country.index', compact('list'));
+        //
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $list = country::all();
-        return view('country.create', compact('list'));
+        $list = Country::all();
+        return view('admincp.country.form', compact('list'));
     }
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $data = $request->all();
-
-        $country = new country();
+        $country = new Country();
         $country->title = $data['title'];
+        $country->slug = $data['title'];
         $country->description = $data['description'];
-        $country->status = $request->input('status', 0);
+        $country->status = $data['status'];
         $country->save();
-
-        return redirect()->back()->with('success', 'Thêm thể loại thành công!');
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $country = country::findOrFail($id);
-        return view('country.show', compact('country'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $country = country::findOrFail($id);
-        $list = country::all();
-        return view('country.create', compact('list', 'country'));
+        $country = Country::find($id);
+        $list = Country::all();
+        return view('admincp.country.form', compact('list','country'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
-
-        $country = country::findOrFail($id);
+        $country = Country::find($id);
         $country->title = $data['title'];
+        $country->slug = $data['title'];
         $country->description = $data['description'];
-        $country->status = $request->input('status', 0);
+        $country->status = $data['status'];
         $country->save();
-
-        return redirect()->back()->with('success', 'Cập nhật thể loại thành công!');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        country::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Xóa thể loại thành công!');
+        Country::find($id)->delete();
+        return redirect()->back();
     }
 }
