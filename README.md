@@ -1,3 +1,12 @@
+# Dự án Xây dựng Web Xem Phim trực tuyến 🎬
+
+# Thành viên 
+- **Nguyễn Thị Lan Anh :** 23010823
+- **Đào Phúc Vinh :** 23010702 
+
+- **Lớp:** Kĩ thuật phần mềm 1-1-25(COUR01.TH5)
+  ***
+
 # Mô Tả Dự Án
 📖 Giới thiệu
 
