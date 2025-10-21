@@ -348,6 +348,18 @@ class IndexController extends Controller
 
    <img width="1127" height="428" alt="image" src="https://github.com/user-attachments/assets/e18cd28b-3884-4a3a-8698-660d2c8d3a48" />
 
+   Người dùng truy cập vào trang đăng nhập sẽ thấy giao diện gồm các thành phần chính:
+
+Trường “E-Mail Address”: nơi người dùng nhập địa chỉ email đã đăng ký tài khoản.
+
+Trường “Password”: nơi nhập mật khẩu tương ứng với tài khoản.
+
+Tùy chọn “Remember Me”: giúp lưu phiên đăng nhập cho lần truy cập sau.
+
+Nút “Login”: gửi thông tin lên server để xác thực người dùng.
+
+Liên kết “Forgot Your Password?”: hỗ trợ người dùng đặt lại mật khẩu khi quên.
+
 2.Đăng kí 
 
    <img width="1199" height="598" alt="image" src="https://github.com/user-attachments/assets/d024f3b3-0a21-4f2e-afe7-8ac98c10c10a" />
