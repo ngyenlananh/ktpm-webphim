@@ -97,6 +97,18 @@ Có gợi ý phim liên quan hoặc phim cùng thể loại.
 
 <img width="351" height="304" alt="image" src="https://github.com/user-attachments/assets/95ea7ce7-2f4c-4634-b6d1-6ef1faaca7c4" />
 
+Người dùng truy cập vào trang đăng nhập sẽ thấy giao diện gồm các thành phần chính:
+
+Trường “E-Mail Address”: nơi người dùng nhập địa chỉ email đã đăng ký tài khoản.
+
+Trường “Password”: nơi nhập mật khẩu tương ứng với tài khoản.
+
+Tùy chọn “Remember Me”: giúp lưu phiên đăng nhập cho lần truy cập sau.
+
+Nút “Login”: gửi thông tin lên server để xác thực người dùng.
+
+Liên kết “Forgot Your Password?”: hỗ trợ người dùng đặt lại mật khẩu khi quên.
+
 Đăng kí 
 
 <img width="388" height="329" alt="image" src="https://github.com/user-attachments/assets/8b3f3b5a-6624-4107-9e7d-25f60671a855" />
