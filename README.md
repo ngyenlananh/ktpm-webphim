@@ -369,31 +369,31 @@ Trong trường hợp nhập sai hoặc trùng email, Laravel sẽ hiển thị 
 
 → Chức năng đăng ký giúp đảm bảo mỗi người dùng có tài khoản riêng biệt, phục vụ cho quá trình quản lý và bảo mật hệ thống.
 
-3.Trang Admin 
+3.Trang Admin(Trang quản trị phim)
 
   <img width="1890" height="918" alt="image" src="https://github.com/user-attachments/assets/1a6b4c61-7cd3-40ba-9840-45d8308dcbad" />
 
   ***Giao diện trang được thiết kế trực quan, gồm các thành phần chính***
 
-     Thanh menu điều hướng (Navigation Bar) ở phía trên cho phép admin truy cập nhanh đến các danh mục:
+     - Thanh menu điều hướng (Navigation Bar) ở phía trên cho phép admin truy cập nhanh đến các danh mục:
 
          Trang chủ, Thể loại, Quốc gia, Năm phim, Phim chiếu rạp, Phim lẻ, Phim mới, Phim thuyết minh, Phim hoạt hình, Phim bộ.
 
-     Thanh tìm kiếm (Search bar) giúp tìm nhanh phim theo tên.
+     - Thanh tìm kiếm (Search bar) giúp tìm nhanh phim theo tên.
 
-     Khu vực lọc phim (Lọc phim) cho phép lọc theo thể loại hoặc trạng thái (phim mới, phim hot, phim chiếu rạp…).
+     - Khu vực lọc phim (Lọc phim) cho phép lọc theo thể loại hoặc trạng thái (phim mới, phim hot, phim chiếu rạp…).
 
-     Danh sách phim hiển thị (Phim hot, Phim chiếu rạp, Phim mới...) được sắp xếp theo từng mục riêng. Mỗi phim có ảnh đại diện, tiêu đề, định dạng (HD, Trailer, HDCam, Phụ đề...), cùng thông tin lượt xem.
+     - Danh sách phim hiển thị (Phim hot, Phim chiếu rạp, Phim mới...) được sắp xếp theo từng mục riêng. Mỗi phim có ảnh đại diện, tiêu đề, định dạng (HD, Trailer, HDCam, Phụ đề...), cùng thông tin lượt xem.
 
-    Tại đây, admin có thể thực hiện các chức năng như:
+    * Tại đây, admin có thể thực hiện các chức năng như:
 
           Thêm mới phim, chỉnh sửa thông tin, xóa phim cũ.
 
           Cập nhật thể loại, quốc gia, năm sản xuất.
 
-         Theo dõi lượng xem và tình trạng phim để điều chỉnh nội dung phù hợp.
+          Theo dõi lượng xem và tình trạng phim để điều chỉnh nội dung phù hợp.
 
-→ Trang Admin là thành phần quan trọng trong hệ thống, giúp quản lý toàn bộ dữ liệu phim, đảm bảo website luôn hiển thị thông tin chính xác và cập nhật.
+  → Trang Admin là thành phần quan trọng trong hệ thống, giúp quản lý toàn bộ dữ liệu phim, đảm bảo website luôn hiển thị thông tin chính xác và cập nhật.
 
 4. Chi tiết phim
 
