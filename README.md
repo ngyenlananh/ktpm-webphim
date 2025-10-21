@@ -352,10 +352,48 @@ class IndexController extends Controller
 2.Đăng kí 
 
    <img width="1199" height="598" alt="image" src="https://github.com/user-attachments/assets/d024f3b3-0a21-4f2e-afe7-8ac98c10c10a" />
+   ***Giao diện gồm các thành phần chính***
+
+        Name: người dùng nhập tên hiển thị của mình.
+
+        E-Mail Address: địa chỉ email dùng để đăng ký và nhận thông báo từ hệ thống.
+
+        Password: mật khẩu dùng để đăng nhập.
+
+       Confirm Password: nhập lại mật khẩu để xác nhận, tránh sai sót.
+
+       Nút “Register”: khi nhấn, hệ thống sẽ kiểm tra tính hợp lệ của thông tin nhập vào.
+
+       Nếu người dùng nhập đúng định dạng và email chưa được sử dụng, tài khoản sẽ được tạo và lưu vào cơ sở dữ liệu. Sau đó, hệ thống có thể tự động chuyển hướng đến trang đăng nhập hoặc trang chủ.
+Trong trường hợp nhập sai hoặc trùng email, Laravel sẽ hiển thị thông báo lỗi cụ thể để người dùng sửa lại thông tin.
+
+→ Chức năng đăng ký giúp đảm bảo mỗi người dùng có tài khoản riêng biệt, phục vụ cho quá trình quản lý và bảo mật hệ thống.
 
 3.Trang Admin 
 
   <img width="1890" height="918" alt="image" src="https://github.com/user-attachments/assets/1a6b4c61-7cd3-40ba-9840-45d8308dcbad" />
+
+  ***Giao diện trang được thiết kế trực quan, gồm các thành phần chính***
+
+     Thanh menu điều hướng (Navigation Bar) ở phía trên cho phép admin truy cập nhanh đến các danh mục:
+
+         Trang chủ, Thể loại, Quốc gia, Năm phim, Phim chiếu rạp, Phim lẻ, Phim mới, Phim thuyết minh, Phim hoạt hình, Phim bộ.
+
+     Thanh tìm kiếm (Search bar) giúp tìm nhanh phim theo tên.
+
+     Khu vực lọc phim (Lọc phim) cho phép lọc theo thể loại hoặc trạng thái (phim mới, phim hot, phim chiếu rạp…).
+
+     Danh sách phim hiển thị (Phim hot, Phim chiếu rạp, Phim mới...) được sắp xếp theo từng mục riêng. Mỗi phim có ảnh đại diện, tiêu đề, định dạng (HD, Trailer, HDCam, Phụ đề...), cùng thông tin lượt xem.
+
+    Tại đây, admin có thể thực hiện các chức năng như:
+
+          Thêm mới phim, chỉnh sửa thông tin, xóa phim cũ.
+
+          Cập nhật thể loại, quốc gia, năm sản xuất.
+
+         Theo dõi lượng xem và tình trạng phim để điều chỉnh nội dung phù hợp.
+
+→ Trang Admin là thành phần quan trọng trong hệ thống, giúp quản lý toàn bộ dữ liệu phim, đảm bảo website luôn hiển thị thông tin chính xác và cập nhật.
 
 4. Chi tiết phim
 
