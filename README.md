@@ -399,30 +399,30 @@ Trong trường hợp nhập sai hoặc trùng email, Laravel sẽ hiển thị 
 
    <img width="1364" height="910" alt="image" src="https://github.com/user-attachments/assets/b2a75a13-7c71-4975-8e95-080ea4662214" />
 
-  - Trang chi tiết phim cung cấp đầy đủ thông tin về bộ phim được chọn, giúp người dùng có cái nhìn tổng quan trước khi xem. Giao diện được thiết kế trực quan, với bố cục rõ ràng, chia thành các phần như sau:
+   ***Trang chi tiết phim cung cấp đầy đủ thông tin về bộ phim được chọn, giúp người dùng có cái nhìn tổng quan trước khi xem. Giao diện được thiết kế trực quan, với bố cục rõ ràng, chia thành các phần như sau***
    
-   Tên phim: Hiển thị tên gốc và tên tiếng Việt (ví dụ: Chú Chó Lulu – Dog).
+    Tên phim: Hiển thị tên gốc và tên tiếng Việt (ví dụ: Chú Chó Lulu – Dog).
 
     Ảnh bìa phim: Hiển thị poster phim kèm nút phát trailer.
 
-   Thông tin phim: Bao gồm:
+    Thông tin phim: Bao gồm:
 
-   Trạng thái: Định dạng (HD), tình trạng phụ đề (Phụ đề).
+    Trạng thái: Định dạng (HD), tình trạng phụ đề (Phụ đề).
 
-   Thời lượng: Tổng thời gian của phim (133 phút).
+    Thời lượng: Tổng thời gian của phim (133 phút).
 
-   Tập phim: Cho biết định dạng của tập phim (FullHD).
+    Tập phim: Cho biết định dạng của tập phim (FullHD).
 
-   Thể loại: Liệt kê các thể loại phim liên quan (Hành Động, Hài Hước, Lãng Mạn).
+    Thể loại: Liệt kê các thể loại phim liên quan (Hành Động, Hài Hước, Lãng Mạn).
 
-   Danh mục: Thuộc nhóm phim chiếu rạp.
+    Danh mục: Thuộc nhóm phim chiếu rạp.
 
-   Quốc gia: Xuất xứ phim (Mỹ).
+    Quốc gia: Xuất xứ phim (Mỹ).
 
-   Chất lượng mới nhất: Ví dụ như HD FullHD.
+    Chất lượng mới nhất: Ví dụ như HD FullHD.
 
-- Nội dung phim: Mô tả tóm tắt cốt truyện để người dùng nắm bắt nội dung chính.
-- Trang chi tiết phim là một phần quan trọng trong trải nghiệm người dùng, cung cấp thông tin nhanh chóng và đầy đủ, từ đó giúp người xem đưa ra quyết định dễ dàng hơn khi lựa chọn phim để xem.
+*** Nội dung phim: Mô tả tóm tắt cốt truyện để người dùng nắm bắt nội dung chính.***
+*** Trang chi tiết phim là một phần quan trọng trong trải nghiệm người dùng, cung cấp thông tin nhanh chóng và đầy đủ, từ đó giúp người xem đưa ra quyết định dễ dàng hơn khi lựa chọn phim để xem***
 
 5.Trang quản lý phim
 
