@@ -2,8 +2,6 @@
 
 
 
-- **Lớp:** Kĩ thuật phần mềm 1-1-25(COUR01.TH5)
-  ***
 
 # Mô Tả Dự Án
 📖 Giới thiệu
